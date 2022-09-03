@@ -32,17 +32,21 @@ function initDB() {
   console.log("发起匿名登录"); // true
 }
 // 暴露出这些属性和方法
-function addData(args) {
+function addData(orderInfo, tableGoods) {
+  var moment = require('moment');
   this.database
     .collection("my-vue-app-order-db")
     .add({
-      datecomplete: args.order_datetime, //todo 控件需要时间timepick，获取规范的时间
-      datesaled: args.order_expected_time, //todo 控件需要时间timepick，获取规范的时间
-      from: args.order_from,
-      name: args.order_customer,
-      optometrist: args.order_doctor,
-      phone: args.order_phonenum,
-      saler: args.order_saler,
+      datecomplete: orderInfo.order_datetime, //todo 控件需要时间timepick，获取规范的时间
+      datesaled: orderInfo.order_expected_time, //todo 控件需要时间timepick，获取规范的时间
+      from: orderInfo.order_from,
+      name: orderInfo.order_customer,
+      optometrist: orderInfo.order_doctor,
+      phone: orderInfo.order_phonenum,
+      saler: orderInfo.order_saler,
+      order_id: Date.now(),
+      create_time: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
+      goods: tableGoods
     })
     .then((res) => {
       console.log("addData 保存数据成功 %s", res);
