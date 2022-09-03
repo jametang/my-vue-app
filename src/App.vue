@@ -6,21 +6,21 @@
       <el-row :gutter="20">
         <el-col :span="6">
           <div class="grid-content bg-purple">
-            <el-input placeholder="2022-08-01" v-model="order_datetime">
+            <el-input placeholder="2022-08-01" v-model="userInfo.order_datetime">
               <template slot="prepend">销售日期</template>
             </el-input>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="grid-content bg-purple">
-            <el-input placeholder="张三" v-model="order_customer">
+            <el-input placeholder="张三" v-model="userInfo.order_customer">
               <template slot="prepend">顾客姓名</template>
             </el-input>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="grid-content bg-purple">
-            <el-input placeholder="12345678999" v-model="order_phonenum">
+            <el-input placeholder="12345678999" v-model="userInfo.order_phonenum">
               <template slot="prepend">顾客电话</template>
             </el-input>
           </div>
@@ -33,7 +33,7 @@
       <el-row :gutter="20">
         <el-col :span="6">
           <div class="grid-content bg-purple">
-            <el-input placeholder="张三" v-model="order_saler">
+            <el-input placeholder="张三" v-model="userInfo.order_saler">
               <template slot="prepend">
                 <span v-html="'营业员&nbsp;&nbsp;&nbsp;&nbsp;'"></span>
               </template>
@@ -42,7 +42,7 @@
         </el-col>
         <el-col :span="6">
           <div class="grid-content bg-purple">
-            <el-input placeholder="张三" v-model="order_doctor">
+            <el-input placeholder="张三" v-model="userInfo.order_doctor">
               <template slot="prepend">
                 <span v-html="'验光师&nbsp;&nbsp;&nbsp;&nbsp;'"></span>
               </template>
@@ -51,14 +51,14 @@
         </el-col>
         <el-col :span="6">
           <div class="grid-content bg-purple">
-            <el-input placeholder="张三" v-model="order_from">
+            <el-input placeholder="张三" v-model="userInfo.order_from">
               <template slot="prepend">处方来源</template>
             </el-input>
           </div>
         </el-col>
         <el-col :span="6">
           <div class="grid-content bg-purple">
-            <el-input placeholder="2022-08-02" v-model="order_expected_time">
+            <el-input placeholder="2022-08-02" v-model="userInfo.order_expected_time">
               <template slot="prepend">取镜时间</template>
             </el-input>
           </div>
@@ -439,30 +439,7 @@ export default {
             "We've laid the ground work for you. It's time for you to build something epic!",
           duration: 5000,
         });
-        console.log(this.GLOBAL.httpUrl);
-        //test save into db
-        // const cloudbase = require("@cloudbase/node-sdk");
-        // const app = cloudbase.init({
-        //   env: "my-vue-app-6gy9qpwhaa42ffed",
-        // });
-        // var database = app.database();
-        this.GLOBAL.database
-          .collection("my-vue-app-customer-db")
-          .add({
-            datecomplete: this.order_datetime, //todo 控件需要时间timepick，获取规范的时间
-            datesaled: this.order_expected_time, //todo 控件需要时间timepick，获取规范的时间
-            from: this.order_from,
-            name: this.order_customer,
-            optometrist: this.order_doctor,
-            phone: this.order_phonenum,
-            saler: this.order_saler,
-          })
-          .then((res) => {
-            console.log("save db %s", res);
-          })
-          .catch((err) => {
-            console.log("save db error %s", err);
-          });
+        this.GLOBAL.addData(this.userInfo);
       }
     },
     getTime() {
@@ -522,13 +499,15 @@ export default {
   },
   data() {
     return {
-      order_datetime: this.getTime(),
-      order_customer: "XXX",
-      order_phonenum: "12345678999",
-      order_saler: "XXX",
-      order_doctor: "XXX",
-      order_from: "N/A",
-      order_expected_time: this.getTime(),
+      userInfo: {
+        order_datetime: this.getTime(),
+        order_customer: "XXX",
+        order_phonenum: "12345678999",
+        order_saler: "XXX",
+        order_doctor: "XXX",
+        order_from: "N/A",
+        order_expected_time: this.getTime(),
+      },
       editEnable: false,
       tableGoods: [
         {

@@ -32,10 +32,31 @@ function initDB() {
   console.log("发起匿名登录"); // true
 }
 // 暴露出这些属性和方法
+function addData(args) {
+  this.database
+    .collection("my-vue-app-order-db")
+    .add({
+      datecomplete: args.order_datetime, //todo 控件需要时间timepick，获取规范的时间
+      datesaled: args.order_expected_time, //todo 控件需要时间timepick，获取规范的时间
+      from: args.order_from,
+      name: args.order_customer,
+      optometrist: args.order_doctor,
+      phone: args.order_phonenum,
+      saler: args.order_saler,
+    })
+    .then((res) => {
+      console.log("addData 保存数据成功 %s", res);
+    })
+    .catch((err) => {
+      console.log("addData 保存数据失败 %s", err);
+    });
+  console.log("addData保存数据"); // true
+}
 
 export default {
   httpUrl,
   initDB,
+  addData,
   data() {
     return {
       database,
