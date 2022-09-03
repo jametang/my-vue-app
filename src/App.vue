@@ -439,7 +439,8 @@ export default {
             "We've laid the ground work for you. It's time for you to build something epic!",
           duration: 5000,
         });
-        this.GLOBAL.addData(this.orderInfo, this.tableGoods);
+        // this.GLOBAL.addData(this.orderInfo, this.tableGoods);
+        this.GLOBAL.updateData(this.orderInfo, this.tableGoods);
       }
     },
     getTime() {
@@ -509,7 +510,8 @@ export default {
         order_expected_time: this.getTime(),
         order_id: 0,
         create_time: "",
-        modify_time: ""
+        modify_time: "",
+        _id: "b69f67c06313238d14136cec48433d87"
       },
       editEnable: false,
       tableGoods: [

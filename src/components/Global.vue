@@ -57,10 +57,39 @@ function addData(orderInfo, tableGoods) {
   console.log("addData保存数据"); // true
 }
 
+// 暴露出这些属性和方法
+function updateData(orderInfo, tableGoods) {
+  var moment = require('moment');
+  this.database
+    .collection("my-vue-app-order-db")
+    .doc(orderInfo._id)
+    .set({
+      datecomplete: orderInfo.order_datetime, //todo 控件需要时间timepick，获取规范的时间
+      datesaled: orderInfo.order_expected_time, //todo 控件需要时间timepick，获取规范的时间
+      from: orderInfo.order_from,
+      name: orderInfo.order_customer,
+      optometrist: orderInfo.order_doctor,
+      phone: orderInfo.order_phonenum,
+      saler: orderInfo.order_saler,
+      order_id: Date.now(),
+      create_time: orderInfo.create_time,
+      modify_time: moment(Date.now()).format('YYYY-MM-DD HH:mm:ss'),
+      goods: tableGoods
+    })
+    .then((res) => {
+      console.log("updateData 保存数据成功 %s", res);
+    })
+    .catch((err) => {
+      console.log("updateData 保存数据失败 %s", err);
+    });
+  console.log("updateData保存数据"); // true
+}
+
 export default {
   httpUrl,
   initDB,
   addData,
+  updateData,
   data() {
     return {
       database,
