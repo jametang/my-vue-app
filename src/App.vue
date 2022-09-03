@@ -405,7 +405,7 @@
 
     <div>
       <el-button @click="modifyCommit">
-        <span>{{editEnable ? '保存' : '编辑'}}</span>
+        <span>{{ editEnable ? "保存" : "编辑" }}</span>
       </el-button>
     </div>
     <!-- <div>
@@ -416,15 +416,17 @@
 
 <script>
 export default {
-  // mounted() {
-  //   console.log("test mounted 0");
-  //   this.$refs.upload.addEventListener('change', e => {//绑定监听表格导入事件
-  //     console.log("test mounted 1");
-  //     this.readExcel(e);
-  //   })
-  // },
+  mounted() {
+    console.log("App mounted");
+    // this.$refs.upload.addEventListener('change', e => {//绑定监听表格导入事件
+    //   console.log("test mounted 1");
+    //   this.readExcel(e);
+    // })
+    //初始化tencentclouddb
+    this.GLOBAL.initDB();
+  },
   created() {
-    console.log("test created ");
+    console.log("App created");
   },
   methods: {
     modifyCommit() {
@@ -437,6 +439,30 @@ export default {
             "We've laid the ground work for you. It's time for you to build something epic!",
           duration: 5000,
         });
+        console.log(this.GLOBAL.httpUrl);
+        //test save into db
+        // const cloudbase = require("@cloudbase/node-sdk");
+        // const app = cloudbase.init({
+        //   env: "my-vue-app-6gy9qpwhaa42ffed",
+        // });
+        // var database = app.database();
+        this.GLOBAL.database
+          .collection("my-vue-app-customer-db")
+          .add({
+            datecomplete: this.order_datetime, //todo 控件需要时间timepick，获取规范的时间
+            datesaled: this.order_expected_time, //todo 控件需要时间timepick，获取规范的时间
+            from: this.order_from,
+            name: this.order_customer,
+            optometrist: this.order_doctor,
+            phone: this.order_phonenum,
+            saler: this.order_saler,
+          })
+          .then((res) => {
+            console.log("save db %s", res);
+          })
+          .catch((err) => {
+            console.log("save db error %s", err);
+          });
       }
     },
     getTime() {
@@ -447,7 +473,6 @@ export default {
       // var hours = date1.getHours();
       // var minutes = date1.getMinutes();
       // var seconds = date1.getSeconds();
-      console.log("test gettime");
       return (
         year + "年" + month + "月" + day + "日"
       ); /*+ hours + ":" + minutes + ":" + seconds*/
