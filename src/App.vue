@@ -439,8 +439,7 @@ export default {
             "We've laid the ground work for you. It's time for you to build something epic!",
           duration: 5000,
         });
-        // this.GLOBAL.addData(this.orderInfo, this.tableGoods);
-        this.GLOBAL.updateData(this.orderInfo, this.tableGoods);
+        this.GLOBAL.addData(this.orderInfo, this.tableGoods);
       }
     },
     getTime() {
