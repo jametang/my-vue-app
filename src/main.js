@@ -3,7 +3,7 @@ import App from './App.vue'
 import ElementUI from "element-ui"
 import 'element-ui/lib/theme-chalk/index.css'
 import global_ from './components/Global.vue'
-
+import router from './router/index.js'
 // import { read, writeFileXLSX, utils} from "xlsx";
 
 import cloudbase from '@cloudbase/js-sdk';
@@ -19,6 +19,7 @@ Vue.use(ElementUI)
 Vue.use(cloudbase)
 
 new Vue({
+  router,
   el: '#app',
   render: h => h(App)
 })
