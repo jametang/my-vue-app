@@ -64,7 +64,7 @@
       </el-table>
     </div>
     <div>
-      <button @click="jumpto">跳转到detailorder</button>
+      <el-button @click="jumpto" class="add" type="primary" plain>新建</el-button>
     </div>
   </div>
 </template>
@@ -152,6 +152,10 @@ export default {
   line-height: 1;
   text-align: center;
   color: red;
+}
+.add {
+  padding: 16px;
+  margin-top: 100px;
 }
 </style>
 
