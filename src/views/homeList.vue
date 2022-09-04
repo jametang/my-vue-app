@@ -56,7 +56,9 @@
           align="center"
         >
           <template slot-scope="scope">
-            <span>{{ scope.row.status }}</span>
+            <span :class="ShowStastus(scope.row.status, 'class')">{{
+              ShowStastus(scope.row.status)
+            }}</span>
           </template>
         </el-table-column>
       </el-table>
@@ -69,6 +71,19 @@
 
 <script>
 import { isArray } from "@vue/shared";
+
+const CONTRACTCHECKMAP = [
+  {
+    value: 100,
+    text: "处理中",
+    class: "pending",
+  },
+  {
+    value: 101,
+    text: "已完成",
+    class: "complete",
+  },
+];
 
 export default {
   created() {
@@ -113,7 +128,30 @@ export default {
         },
       });
     },
+    ShowStastus(value, type = "text") {
+      if (typeof value == "undefined") return "";
+      return CONTRACTCHECKMAP.find((item) => item.value == value)[type];
+    },
   },
 };
 </script>
+
+<style>
+.complete {
+  display: inline-block;
+  padding: 6px 13px;
+  border-radius: 2px;
+  line-height: 1;
+  text-align: center;
+  color: green;
+}
+.pending {
+  display: inline-block;
+  padding: 6px 13px;
+  border-radius: 2px;
+  line-height: 1;
+  text-align: center;
+  color: red;
+}
+</style>
 
