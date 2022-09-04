@@ -417,16 +417,16 @@
   <script>
   export default {
     mounted() {
-      console.log("App mounted");
+      console.log("detailOrder mounted");
       // this.$refs.upload.addEventListener('change', e => {//绑定监听表格导入事件
       //   console.log("test mounted 1");
       //   this.readExcel(e);
       // })
       //初始化tencentclouddb
-      this.GLOBAL.initDB();
+    //   this.GLOBAL.initDB();
     },
     created() {
-      console.log("App created");
+      console.log("detailOrder created");
     },
     methods: {
       modifyCommit() {
