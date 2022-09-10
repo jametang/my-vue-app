@@ -1,6 +1,6 @@
 <template>
   <div id="homelist">
-    <h1>时光眼镜</h1>
+    <h1>XXX眼镜</h1>
     <div>
       <el-table
         :data="OrderList"

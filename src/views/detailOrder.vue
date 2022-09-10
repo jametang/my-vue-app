@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-      <h1>友时光眼镜销售单</h1>
+      <h1>XXX眼镜销售单</h1>
   
       <div>
         <el-row :gutter="20">
